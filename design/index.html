@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CookBook Recipe App Design</title>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="src/main.css">
+</head>
+<body class="bg-white text-grey-darkest font-sans">
+
+    <div class="hidden">
+        <div class="w-32 h-32 text-xl my-4" style="background-color: #2F365F">
+            <div class="bg-black text-white">
+                #2F365F
+            </div>
+        </div>
+        <div class="w-32 h-32 text-xl my-4" style="background-color: #F9CFF2">
+            <div class="bg-black text-white">
+                #F9CFF2
+            </div>
+        </div>
+        <div class="w-32 h-32 text-xl my-4" style="background-color: #52FFEE">
+            <div class="bg-black text-white">
+                #52FFEE
+            </div>
+        </div>
+    </div>
+
+    <div class="xl:flex flex-wrap">
+        <div class="bg-indigo-darker text-white xl:hidden">
+            <div class="flex items-center justify-between py-4 px-8">       
+                <h1 class="text-2xl">CookBook</h1>
+                <button id="menu-toggle" class="text-white">
+                    <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <nav id="nav-drawer" class="border-r-2 border-teal-lighter z-10 fixed pin transition bg-indigo-darker text-white w-320px xl:min-h-screen h-100 translateX-320px xl:hidden">
+            <div class="absolute pin w-320px overflow-y-auto">
+                <button id="close-menu" class="text-white absolute pin-t pin-r m-4">
+                    <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z"/>
+                    </svg>
+                </button>
+                <div class="logo">
+                    <img class="block w-32 mx-auto my-4" src="./raw-stuff/undraw_tasting_de22.svg" alt="CookBook Logo">
+                    <span class="block text-center text-h1 font-bold">CookBook</span>
+                </div>
+
+                <div class="text-center py-8 sm:hidden">
+                    <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded mr-2">
+                        <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M5 5a5 5 0 0 1 10 0v2A5 5 0 0 1 5 7V5zM0 16.68A19.9 19.9 0 0 1 10 14c3.64 0 7.06.97 10 2.68V20H0v-3.32z"/>
+                        </svg>
+                        Log in
+                    </button>
+        
+                    <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded">
+                        <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M2 6H0v2h2v2h2V8h2V6H4V4H2v2zm7 0a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0V6zm11 9.14A15.93 15.93 0 0 0 12 13c-2.91 0-5.65.78-8 2.14V18h16v-2.86z"/>
+                        </svg>
+                        Sign up
+                    </button>
+                </div>
+        
+                <ul class="list-reset sm:mt-8 font-semibold text-sm">
+                    <li class="bg-indigo-darkest border-r-8 border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-teal-lighter" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M8 20H3V10H0L10 0l10 10h-3v10h-5v-6H8v6z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Home</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Recipes</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M0 2C0 .9.9 0 2 0h16a2 2 0 0 1 2 2v2H0V2zm1 3h18v13a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5zm6 2v2h6V7H7z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Fridge</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="transition bg-indigo-darker text-white w-320px min-h-screen h-100 hidden xl:block">
+            <div class="fixed pin w-320px overflow-y-auto">
+                <h1 class="logo">
+                    <img class="block w-32 mx-auto my-4" src="./raw-stuff/undraw_tasting_de22.svg" alt="CookBook Logo">
+                    <span class="block text-center">CookBook</span>
+                </h1>
+        
+                <ul class="list-reset mt-8 font-semibold text-sm">
+                    <li class="bg-indigo-darkest border-r-8 border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-teal-lighter" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M8 20H3V10H0L10 0l10 10h-3v10h-5v-6H8v6z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Home</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Recipes</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M0 2C0 .9.9 0 2 0h16a2 2 0 0 1 2 2v2H0V2zm1 3h18v13a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5zm6 2v2h6V7H7z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Fridge</span>
+                        </a>
+                    </li>
+                    <li class="transition hover:bg-indigo-darkest border-r-8 border-transparent hover:border-teal-lighter">
+                        <a class="block py-4 px-4 no-underline text-white" href="#">
+                            <svg class="inline-block align-middle w-6 h-6 mx-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/>
+                            </svg>
+                            <span class="inline-block align-middle">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+        <main class="flex-1 px-4 sm:px-8 xl:px-16">
+            <div class="[ landing-page ] [ hidden ]">
+                <div class="flex justify-between items-center">
+                    <h2 class="py-16 text-4xl py-8">Latest Recipes</h2>
+        
+                    <div>
+                        <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded mr-2">
+                            <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M5 5a5 5 0 0 1 10 0v2A5 5 0 0 1 5 7V5zM0 16.68A19.9 19.9 0 0 1 10 14c3.64 0 7.06.97 10 2.68V20H0v-3.32z"/>
+                            </svg>
+                            Log in
+                        </button>
+            
+                        <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded">
+                            <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M2 6H0v2h2v2h2V8h2V6H4V4H2v2zm7 0a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0V6zm11 9.14A15.93 15.93 0 0 0 12 13c-2.91 0-5.65.78-8 2.14V18h16v-2.86z"/>
+                            </svg>
+                            Sign up
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap -mx-4">
+                    <div class="w-1/4 xl:w-1/5 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <img class="absolute pin block" src="/src/img/food/spaghetti.jpg" alt="Spaghetti dish">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Spaghetti carbonara with special sauce
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z"/>
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z"/>
+                                            </svg>
+                                            <span class="leading-none text-sm">800 kcal</span>
+                                        </div>
+
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z"/>
+                                            </svg>
+                                            <span class="leading-none text-sm">45 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="w-1/4 xl:w-1/5 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <svg class="absolute absolute--is-center block w-32 h-32 bg-pink-lightest fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z"/>
+                                    </svg>
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Some very delicious food
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z"/>
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z"/>
+                                            </svg>
+                                            <span class="leading-none text-sm">500 kcal</span>
+                                        </div>
+
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z"/>
+                                            </svg>
+                                            <span class="leading-none text-sm">35 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="w-1/4 xl:w-1/5 p-4">
+                        <img class="block" src="https://via.placeholder.com/500x500" alt="">
+                    </div>
+                    <div class="w-1/4 xl:w-1/5 p-4">
+                        <img class="block" src="https://via.placeholder.com/500x500" alt="">
+                    </div>
+                    <div class="w-1/4 xl:w-1/5 p-4">
+                        <img class="block" src="https://via.placeholder.com/500x500" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="[ recipes ]">
+                <div class="flex justify-between items-center">
+                    <h2 class="py-16 text-4xl py-8">Recipes</h2>
+        
+                    <div class="hidden sm:block">
+                        <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded mr-2">
+                            <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M5 5a5 5 0 0 1 10 0v2A5 5 0 0 1 5 7V5zM0 16.68A19.9 19.9 0 0 1 10 14c3.64 0 7.06.97 10 2.68V20H0v-3.32z"/>
+                            </svg>
+                            Log in
+                        </button>
+            
+                        <button class="bg-indigo-dark transition hover:bg-indigo-darker text-white font-bold p-3 rounded">
+                            <svg class="fill-current inline-block align-top w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M2 6H0v2h2v2h2V8h2V6H4V4H2v2zm7 0a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0V6zm11 9.14A15.93 15.93 0 0 0 12 13c-2.91 0-5.65.78-8 2.14V18h16v-2.86z"/>
+                            </svg>
+                            Sign up
+                        </button>
+                    </div>
+                </div>
+
+                <div class="[ filter-v1 ] [ my-8 hidden ]">
+                    <div class="relative inline-block custom-radio">
+                        <input id="radio1" type="radio" name="id-type" value="radio1">
+                        <label for="radio1" class="block rounded text-center p-3 border border-grey">
+                            <!-- <svg class="text-grey-darker fill-current w-5 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9 18v-7L0 2V0h20v2l-9 9v7l5 1v1H4v-1l5-1zm2-10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                            </svg> -->
+                            <svg class="text-grey-darker fill-current w-10 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.353 32.925">
+                                <path d="M83.319 28.104H7.036a1.47 1.47 0 1 1 0-2.94h76.283a1.47 1.47 0 0 1 0 2.94zM88.883 32.925H1.47a1.47 1.47 0 1 1 0-2.94h87.413a1.47 1.47 0 0 1 0 2.94z"/>
+                                <path d="M21.721 27.02c-4.395 0-7.97-3.574-7.97-7.969 0-4.395 3.575-7.971 7.97-7.971s7.97 3.576 7.97 7.971-3.575 7.969-7.97 7.969zm0-13a5.037 5.037 0 0 0-5.03 5.031 5.036 5.036 0 0 0 5.03 5.029 5.036 5.036 0 0 0 5.03-5.029 5.037 5.037 0 0 0-5.03-5.031zM53.233 26.538H37.737a4.435 4.435 0 0 1-4.431-4.43v-1.324a4.437 4.437 0 0 1 4.431-4.432h15.496a4.437 4.437 0 0 1 4.431 4.432v1.324a4.435 4.435 0 0 1-4.431 4.43zm-15.496-7.246c-.822 0-1.491.67-1.491 1.492v1.324c0 .822.669 1.49 1.491 1.49h15.496c.822 0 1.491-.668 1.491-1.49v-1.324c0-.822-.669-1.492-1.491-1.492z"/>
+                                <path d="M47.265 18.022c-.022 0-.045 0-.067-.002a1.47 1.47 0 0 1-1.39-1.664 3.034 3.034 0 0 0-3.029-2.961 3.033 3.033 0 0 0-3.029 2.963 1.47 1.47 0 0 1-2.925.299 1.809 1.809 0 0 1-.016-.232 5.976 5.976 0 0 1 5.97-5.969 5.976 5.976 0 0 1 5.97 5.969c0 .066-.01.188-.02.266a1.472 1.472 0 0 1-1.464 1.331zM68.365 18.557c-.34 0-.679-.117-.954-.352a1.7 1.7 0 0 1-.15-.127c-1.161-1.16-1.782-2.66-1.782-4.254 0-1.596.621-3.094 1.749-4.223a5.932 5.932 0 0 1 4.221-1.748c1.595 0 3.094.621 4.222 1.75.047.047.136.15.176.203.555.592.494 1.486-.098 2.041-.594.557-1.554.49-2.108-.102a1.467 1.467 0 0 1-.089-.104c-1.179-1.125-3.117-1.09-4.245.039a3.01 3.01 0 0 0-.888 2.143c0 .783.297 1.523.836 2.09a1.472 1.472 0 0 1-.89 2.644z"/>
+                                <path d="M62.221 26.77a1.469 1.469 0 0 1-1.039-2.508L77.495 7.95a1.469 1.469 0 1 1 2.078 2.078L63.26 26.341a1.463 1.463 0 0 1-1.039.429z"/>
+                                <path d="M74.909 26.708c-.376 0-.752-.143-1.039-.43l-5.688-5.688a1.469 1.469 0 1 1 2.078-2.078l5.688 5.688a1.469 1.469 0 0 1-1.039 2.508z"/>
+                                <path d="M76.595 26.397a1.472 1.472 0 0 1-1.405-1.041l-2.75-9a1.47 1.47 0 0 1 2.813-.859l2.75 9a1.473 1.473 0 0 1-1.408 1.9zM21.822 13.52a1.47 1.47 0 0 1-1.47-1.469V1.471a1.47 1.47 0 1 1 2.94 0v10.58a1.47 1.47 0 0 1-1.47 1.469z"/>
+                            </svg>
+                            <span class="text-xs tracking-wide uppercase">Appetizers</span>
+                        </label>
+                    </div>
+
+                    <div class="relative inline-block custom-radio">
+                        <input id="radio2" type="radio" name="id-type" value="radio2">
+                        <label for="radio2" class="block rounded text-center p-3 border border-grey">
+                            <!-- <svg class="text-grey-darker fill-current w-5 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z" />
+                            </svg> -->
+                            <svg class="text-grey-darker fill-current w-10 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65.67 47.65" data-name="Layer 1">
+                                <path d="M4.66 41.65h56.33a4.51 4.51 0 0 0 4.48-5 33.27 33.27 0 0 0-28.16-29 5.08 5.08 0 0 0 .68-2.5 5.15 5.15 0 0 0-10.3 0 5.08 5.08 0 0 0 .66 2.46 33.27 33.27 0 0 0-28.16 29 4.51 4.51 0 0 0 4.47 5zM32.84 3.03a2.14 2.14 0 1 1-2.15 2.12 2.15 2.15 0 0 1 2.15-2.12zM3.17 36.97a30.17 30.17 0 0 1 29.67-26.65A30.17 30.17 0 0 1 62.5 36.97a1.51 1.51 0 0 1-.38 1.18 1.48 1.48 0 0 1-1.12.5H4.66a1.47 1.47 0 0 1-1.11-.5 1.51 1.51 0 0 1-.38-1.18zM1.5 47.65h62.67a1.5 1.5 0 0 0 0-3H1.5a1.5 1.5 0 0 0 0 3z"/>
+                                <path d="M10.87 33.75a1.5 1.5 0 0 0 1.88-1 21.12 21.12 0 0 1 13.61-13.76 1.5 1.5 0 1 0-.93-2.84A24.12 24.12 0 0 0 9.89 31.87a1.5 1.5 0 0 0 .98 1.88z"/>
+                            </svg>
+                            <span class="text-xs tracking-wide uppercase">Main dishes</span>
+                        </label>
+                    </div>
+
+                    <div class="relative inline-block custom-radio">
+                        <input id="radio3" type="radio" name="id-type" value="radio3">
+                        <label for="radio3" class="block rounded text-center p-3 border border-grey">
+                            <!-- <svg class="text-grey-darker fill-current w-5 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM6.7 9.29L9 11.6l4.3-4.3 1.4 1.42L9 14.4l-3.7-3.7 1.4-1.42z"/>
+                            </svg> -->
+                            <svg class="text-grey-darker fill-current w-10 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67.9 85.4">
+                                <path d="M63.4 47.5l.2-.2c1.3-1.5 5.4-7 4.1-11.9-.7-2.5-2.6-4.4-5.8-5.6a9 9 0 0 0-1.8-.5h-.3l.1-.4c.3-1.2.3-2.4 0-3.7-.9-3.8-3.3-5.8-7.2-5.8h-.4l-.6.1v-.4-.2l.1-.2c.6-4-1.7-9-5.5-12.2A39.4 39.4 0 0 0 26.6 0c-.3 0-.6.2-.7.6-.2.3 0 .8.3 1 0 0 5.4 4 3.3 7.2-1 1.2-3.4 1.5-5.9 1.8-3 .3-6.4.7-7.4 3.4a5.8 5.8 0 0 0-.3 4l.2.3h-.4c-4.5.3-7.6 2.6-8.2 6.4-.2 1.6.2 3.2 1.2 4.5l.3.4-.6.1c-3.9.6-6.4 2-7.6 4.2-1.9 3.3 0 7.7 1.2 10.6v.2c.4.6.6 1.1.7 1.6.2.5.5 1 1 1.5l.1.2v.2c-.5.6-.7 1.2-.7 1.8l.1.9v.1l.1.1 5.5 27c.1 2.7 4.3 4.4 7.8 5.4a70 70 0 0 0 17.2 1.9c15 0 23.4-3.3 24.8-6.3l.2-.6v-.1l5.5-27.2c.2-.4.2-.8.2-1.2 0-.7-.3-1.5-1-2.3zM17.8 14.6c.6-1.7 3.4-2 6-2.3 2.8-.3 5.7-.6 7.1-2.5 1.8-2.6.4-5.4-1-7.2l-.6-.6.8.1a33 33 0 0 1 15 5.7c3.4 2.8 5.5 7.3 5 10.6l-.3 1.2-.1.4-.1.1a4.9 4.9 0 0 1-.6 1 4.3 4.3 0 0 1-.8.7c-.3.3-.6.5-1 .6-2 1-5.5 1.5-9.7 1.5a38 38 0 0 1-16.2-3 23.7 23.7 0 0 1-2.6-1.9l-.2-.2-.4-.5c-1-1.2-.8-2.4-.3-3.7zm-1 5.6h.6l.2.1c.7.7 1.6 1.4 2.8 2.1a39.4 39.4 0 0 0 17.1 3.2c4.5 0 8.3-.6 10.5-1.6 1.1-.5 2-1.3 2.7-2.3v-.2h.2l2.3-.2c3 0 4.7 1.4 5.4 4.4a6 6 0 0 1-.9 5c-1.9 2.7-6.4 4.4-12.9 5l-4.9.2c-13 0-24.2-4.3-25.5-4.8-.5-.2-5.3-2.2-4.7-6 .5-3 3.1-5 7.1-5zM3.5 43.9c-1.1-2.7-2.7-6.5-1.3-9.1.5-.9 1.3-1.6 2.4-2.1 1-.6 2.4-1 4-1.3l1.9-.1h.4l2.4 1.3a77.4 77.4 0 0 0 31.2 4.6c7.2-.6 12-2.5 14.2-5.6l.2-.3.1-.2v-.2h.3c.7.1 1.4.2 2 .5 2.6 1 4.2 2.5 4.7 4.5 1 3.6-1.9 8-3.7 10.3l-.2.2a13.2 13.2 0 0 1-1.2 1.3l-.3.2-.1.1h-.1a57 57 0 0 1-27.2 5c-18 0-28-4.3-29-7.2 0-.5-.4-1.1-.7-1.9zM57.1 78c-.2 2.7-10.1 5.7-23.3 5.7-13.3 0-23.3-3-23.3-5.8L5.6 53.8l.6.3c5 3 15.5 5 27.6 5 12 0 22.7-2 27.6-5l.6-.3zm5.5-27.3c-1.8 4-16.3 6.6-28.8 6.6-17 0-29-3.8-29-7.3l.2-.6.1-.3.3.2c5 3.3 15.7 5.4 28 5.4 13 0 24.3-2.2 28.7-5.7l.2-.2.2.3.3 1c0 .1 0 .4-.2.6z"/>
+                                <path d="M13 59.7h-.1c-.5.1-.8.6-.8 1l2.7 16.7c0 .5.5.8 1 .8.4-.1.8-.6.7-1l-2.6-16.7c-.1-.5-.5-.8-.9-.8zM54.9 59.7h-.2c-.4 0-.8.3-.8.8l-2.6 16.7c-.1.4.2.9.7 1 .4 0 1-.3 1-.8l2.6-16.7c0-.4-.3-.9-.7-1zM44.8 61.5h-.1c-.4 0-.8.4-.8.8l-1.3 17c0 .1 0 .4.2.5l.6.3c.5 0 1-.3 1-.8l1.2-16.8c0-.3 0-.5-.2-.7a.9.9 0 0 0-.6-.3zM23.2 61.5a.9.9 0 0 0-.9 1l1.2 16.8c0 .5.5.8 1 .8.2 0 .4 0 .6-.3l.2-.6L24 62.3c0-.4-.4-.8-.8-.8zM34.4 62.2c-.5 0-.9.4-.9.8v17c0 .4.4.8.8.8v.3-.3c.5 0 1-.4 1-.8V63c0-.4-.4-.8-1-.8z"/>
+                            </svg>
+                            <span class="text-xs tracking-wide uppercase">Desserts</span>
+                        </label>
+                    </div>
+
+                    <div class="relative inline-block custom-radio">
+                        <input id="radio4" type="radio" name="id-type" value="radio4">
+                        <label for="radio4" class="block rounded text-center p-3 border border-grey">
+                            <svg class="text-grey-darker fill-current w-10 h-5 block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 62.9">
+                                <path d="M34.8 33.4h-5.3a.8.8 0 1 0 0 1.6h2.7l-5.7 3.6-.1.1v.2l-.1.1v.1l.2 3c0 .3.3.5.6.5h.5l.1.6h-.5c-.4 0-.6.3-.7.6l-.1 4.4a.6.6 0 0 0 .6.7h34c.2 0 .5-.3.5-.6l.2-4.4c0-.2 0-.4-.2-.5a.6.6 0 0 0-.4-.2h-.7l-.2-.1h.9c.3 0 .6-.3.6-.6l.3-3.3V39l-.1-.1v-.1h-.1v-.1h-.1-.1c-1-.5-6-2.5-10.8-4.3 1.2-.8 2-2.1 2-3.7V19.4a.8.8 0 0 0-1.5 0v11.3c0 1.5-1.3 2.7-2.8 2.7h-.2c-.2 0-.3 0-.5-.2a3.4 3.4 0 0 0-.5-4.4l.6-1.2a.6.6 0 1 0-1.1-.6l-.6 1.1a3 3 0 0 0-1-.1c-1.6 0-3 1.5-3 3.3l-1.8-.3c-1 0-3.2 1.1-5.6 2.4zm-7.2 14.2l.2-2.5c0 .3.2.6.6.6h3.1c1.4.4 3.2.6 5.5.6h.2c1.4 0 2.6-.1 3.6-.3h3.7l.4.2 1.6 1.4H27.6zm1.3-5l14.5.2-.2.5c-.6.8-2 1.8-6.2 1.8-6 0-7.6-1.3-8-2l-.1-.5zm16.8 2.7a2 2 0 0 0-1.2-.5h-1l.3-.4h9.6c.5.2 1.2.2 1.8.3h.3a6 6 0 0 0 1.7-.3h2.1v.3h-8.1c-1 0-1.8.3-2.5.9l-1.4 1.2zm6.8-2.3h5c-.6.3-1.3.5-2.2.4-1.2 0-2-.2-2.8-.4zm7.9 2.8v1.8H48.1l1.3-1c.5-.5 1-.7 1.7-.7H60.4zm.1-4l-32.8-.4-.1-1.7 33 .1zM45.3 29.2h.3l-.3.7a.6.6 0 1 0 1.1.6l.3-.6c.3.4.4.9.4 1.4 0 1.1-.8 2-1.8 2s-1.9-.9-1.9-2c0-1.2.9-2 1.9-2zm-2.8 3.5c.2.4.4.8.8 1l-1.4 2.8a.6.6 0 1 0 1 .6l1.4-2.7a3 3 0 0 0 2.4-.2c3.4 1.2 7.7 2.9 11.4 4.4h-17L29 38.4a52 52 0 0 1 11.4-6.2c.4 0 1.1.1 2.1.4zM84.5 45.8v.5c.2.3.3.7.2.8-.2.2-1 .2-1.8-.6l-.3-.3c-.3-.5-.9-1.3-2.2-.8-.4.2-.6.5-.8.8-.3.4-.5.7-1.5.4-.1 0-.3 0-.4.3 0 .2 0 .3.3.4 1.4.4 1.9-.3 2.2-.7.2-.3.3-.5.5-.5.8-.4 1 0 1.3.5l.5.5c.7.6 1.3.8 1.9.8.3 0 .6 0 .7-.3.4-.3.5-.9 0-1.7a.3.3 0 0 0-.6-.1zM75.6 43.5l.5.2c.3.2.6.4 1 .4h.2a2 2 0 0 0 1.4-1.3c.1-.4 0-1-.3-1.4a.3.3 0 1 0-.6.4c.2.3.3.6.2.8-.1.4-.5.7-1 .8 0 0-.2 0-.5-.3-.3-.2-.7-.5-1.2-.3-1.4.7-2.1.6-2.3.3-.1 0-.1-.2 0-.2l-.1-.5a.3.3 0 0 0-.5 0c-.3.3-.3.8 0 1.1.3.4 1 1 3.2 0zM81.6 39c-.1 1.2.4 2.6 1 3.2l.7.2h.3c.2 0 .3-.3.3-.5-.1-.2-.3-.3-.5-.2l-.3-.1c-.4-.4-.9-1.5-.8-2.6 0-.8-.3-1.3-.6-1.7-.3-.4-.5-.8-.4-1.4a.3.3 0 1 0-.7-.2c-.2 1 .2 1.5.5 2 .3.4.5.7.5 1.3z"/>
+                                <path d="M68.2 45.4c-.5.7-1.2 1.7-.9 2.7.2.3.5.8 1.2 1l1.1.1a9.8 9.8 0 0 0 1.5 0h.7c.4.4.8.6 1.3.6 1 0 1.8-.7 2.1-1.4l.3-.3c0 .2.2.4.4.6.4.5 1 .8 1.8.8.7 0 1.4-.2 2.1-.5a13 13 0 0 1 1.2-.3c.3 0 .6.2 1 .7.5.4 1 .8 1.5 1l-.7.2H71.6a.8.8 0 0 0 0 1.5h11.2c1.4 0 2.6-.7 3.4-1.8.6-.3 1.1-.8 1.3-1.4.3-.6.2-1.3-.2-1.8-.4-.4-.3-1-.2-2l.2-1.5c0-.4 0-.7-.2-1v-.2c.2-.8 0-1.5-.7-1.8-.3-.2-.3-.2 0-1 .1-.3.3-.8.3-1.3a5 5 0 0 0-1.3-3.5 2.6 2.6 0 0 0-2-.9c-.2 0-.4-.2-.7-.5-.4-.4-.8-1-1.4-1-.4 0-.8.2-1.1.6-.8.7-1.3 1.5-1.5 2.1-.5.2-.8.6-1.1.9l-.2.2h-.7c-1.1 0-2 .8-2.1 2h-.2l-.6-.2c-.5-.4-1-.5-1.2-.5-.6 0-1.2.4-1.6 1a2 2 0 0 0-.2 2v.4a2 2 0 0 0-1-.4h-.5c-.8.3-1.4 1-1.5 1.7-.1.6 0 1.1.5 1.5.2.1.3 1.1 0 1.6zm18-1.9L86 45c-.1 1.2-.3 2.2.5 3v.6c-.2.6-1 1.2-1.8 1.2l-.6-.1-1.3-1c-.5-.5-1-1-1.8-1a2 2 0 0 0-.6 0l-1 .4c-.6.2-1.2.4-1.7.4a1 1 0 0 1-1-.4c-.5-.7-1-1.8-1-2.6a3.7 3.7 0 0 0 1.4.5c.6 0 1.3-.4 2-1.1.6-.7 1-1.6.9-2.3v-1.3c.3 1.4 1.5 2.4 3.8 3.2l.6.1c.7 0 1.3-.4 1.8-1zm-5.3-9.7l.4-.2.5.5c.4.4.8 1 1.6 1 .5 0 1 .2 1.2.5a4 4 0 0 1 1 2.7l-.3 1c-.3.7-.7 1.7.6 2.3.2 0 .2.4.2.6-.2.7-.9 1.6-1.7 1.6H84c-2-.8-3.1-1.6-3.4-2.7v-1.4c0-.7 0-1.4-.7-2-.3 0-.4-.3-.4-.8 0-.8.3-2.2 1.4-3.1zM72 40c-.2-.3-.1-.6 0-1l.7-.4c.1 0 .2 0 .3.2.3.3 1 .5 1.5.5.8 0 1.3-.4 1.3-1s.4-1 1-1h.7c.5 0 .8-.3 1-.6l.4-.4v.7c0 .6.3 1.1.7 1.4l.1.1a14 14 0 0 0-.3 4.1c0 .5-.3 1.2-.8 1.7-.5.6-1 1-1.5.9-.4 0-.7-.2-1-.4-.3-.2-.7-.4-1.1-.4-.4 0-.7.2-1 .4-.4.3-.8.4-1.1.4-.6 0-1-.4-1-.8v-1.5c.2-1.1.3-2.3 0-3zM69 46c.7-.9.7-2.6-.1-3.2-.1-.1-.2-.2-.1-.4 0-.3.3-.7.7-.8.3 0 .5 0 .7.3.3.1.5.3 1 .3l-.1.6-.2 1.6c0 .9.9 1.5 1.8 1.5.5 0 1-.2 1.4-.5l.7-.3h.1v.1c0 .6 0 1.1.3 1.7-.5.2-1 .6-1.1 1-.2.4-.6.8-1 .8a1 1 0 0 1-.7-.3A2 2 0 0 0 71 48h-2.3l-.4-.3c-.1-.4.4-1.2.7-1.7z"/>
+                                <path d="M94.5 48.6L81 17.6c-.9-2-2.6-3.4-4.7-3.8L77.4 5v-.5-.1c0-2.6-4.6-4.5-10.6-4.5S56.2 2 56.2 4.6l.1.7 1 8.3h-6.7c-.4-2-1.2-3.5-2.6-4.3-1-.7-2-.9-3.1-.7l-2.2.8-1.7.7c.2-1 .8-1.7 1.7-2.3a.7.7 0 0 0-.7-1.1 4.9 4.9 0 0 0-2.4 3.2 6.3 6.3 0 0 0-2.2-1.8 7.3 7.3 0 0 0-4.5-.5l-1.8.5c-.3.2-.5.5-.4.8 0 0 .5 1.6 1.5 3l-.1.2c-.4.4-.7 1-.9 1.5h-2.6l.3-.7a.6.6 0 0 0-.9-.8c-.4.2-4.5 2.2-5.7 3.8a.6.6 0 0 0 1 .8c.6-.8 2.3-1.9 3.7-2.6l-7.2 15.8v.1c0 .1-2.7 12.3-3.5 14.3-.3.9-.8 1.5-1.4 1.7h-1.1a.6.6 0 1 0-.6 1 2.7 2.7 0 0 0 2.1.2c.7-.3 1.6-.9 2.2-2.4.8-2 3.2-13.4 3.5-14.5l6.9-15.1h3c0 .6.2 1.3.4 2 1.3 5.2 4.3 9.2 7 9.5h1.3c.9-.2 1.4-.7 1.8-1 .2-.3.4-.4.7-.5.8-.1 1.3 0 2 .3a4 4 0 0 0 2.1.3c2.1-.4 3.7-4 4.3-7.2.2-1.3.3-2.4.2-3.4h6.9l1.3 11c0 2.1 4.1 3.3 8 3.3 3.6 0 7.6-1.1 7.8-3l.1-.3.3-2 2.5 5.3a2.7 2.7 0 0 1-2.4 4h-17a.8.8 0 1 0 0 1.5h17c1.5 0 2.8-.8 3.6-2 .8-1.3.9-2.8.2-4.1l-3.6-7.5.8-6a5 5 0 0 1 3.4 2.8l13.4 31a5 5 0 0 1-4.6 7.1H6.6a5 5 0 0 1-4.6-7l3.4-7.9L8.7 51l-.2-.3H6.3a.8.8 0 0 0 0 1.5h2.8l.7 1.9c0 .2.3.4.5.4.3 0 .5-.1.6-.3l1-2h4.9c1.9 0 3.6-1.3 4-3.1L29 19.6a.8.8 0 1 0-1.5-.4l-8.1 29.4c-.3 1.1-1.4 2-2.6 2h-4.1l1-2.1a.6.6 0 0 0-1-.6l-2 3.9h-.2-.2L2.5 29.6l1.5-1 .3-.6 3.5 11.5a.6.6 0 0 0 1.2-.3L4.5 24.5 25 6.6 23 13a.6.6 0 0 0 1.2.3L26.6 5c.1-.2 0-.5-.2-.7a.6.6 0 0 0-.8 0L3.4 23.9c-.2.2-.3.5-.2.7l1 3.2a.6.6 0 0 0-1-.2l-1.8 1.3c-.2.1-.3.4-.2.7l3.4 9.8-4 9.3A6.6 6.6 0 0 0 6 57.8a5.9 5.9 0 0 0 5.8 5.1h71.4c3 0 5.4-2.2 5.8-5a6.6 6.6 0 0 0 5.5-9.3zM32.2 9.2l1-.3a6 6 0 0 1 3.6.4c1.7.8 2.6 2.6 3 3.5l-1 .3a6 6 0 0 1-3.7-.4c-1.6-.8-2.5-2.6-2.9-3.5zm17 9.1c-.7 3.6-2.2 6-3.2 6.2-.5 0-1 0-1.5-.3a4.7 4.7 0 0 0-2.7-.3c-.6.2-1 .5-1.3.8-.3.3-.6.5-1.1.6h-1c-2.3-.2-4.9-4.5-5.9-8.3-.4-1.8-.2-3.1.6-4l1.5 1c1.5.7 3.3.6 4.5.4l1.8-.5c.3-.2.4-.5.3-.8l-.1-.5v-.2l-.2-1c1-.1 1.7-.5 2.4-.8L45 10a3 3 0 0 1 2.2.4c2.2 1.3 2.4 5 1.9 8zm17.6-17c5.6 0 9.5 1.7 9.5 3.3 0 .7-.9 1.5-2.3 2A19 19 0 0 0 67 5.5a19 19 0 0 0-7.2 1.3c-1.4-.6-2.3-1.4-2.3-2.1 0-1.6 3.9-3.4 9.4-3.4zm0 7.8c2.8 0 5.3-.4 7.2-1.1.8.4 1.2 1 1.2 1.3 0 1.1-3.1 2.7-8.3 2.7-5.2 0-8.4-1.6-8.4-2.7 0-.4.5-.9 1.2-1.3 1.9.7 4.4 1.1 7.1 1.1zm-5.2-1.8c1.4-.4 3.2-.6 5.3-.6 2 0 3.9.2 5.2.6a21.7 21.7 0 0 1-10.5 0zm-3.2.1L58 8l-.1-.9.6.4zm15.2 18.4a.6.6 0 0 0 0 .4c0 .8-2.7 2-6.8 2-4 0-6.6-1.2-6.6-2V26l-2-14.9c1.8 1.4 5.3 2.1 8.7 2.1 3.3 0 6.9-.7 8.5-2zm1.7-18.4L76 7l-.2.9a4 4 0 0 0-.5-.5zm7.9 54H11.8a4.3 4.3 0 0 1-4.2-3.5h79.8c-.3 2-2 3.5-4.2 3.5z"/>
+                                <path d="M62 50.6H25.7a.8.8 0 0 0 0 1.5H62a4.3 4.3 0 0 0 4.2-5l-1.5-9a.8.8 0 0 0-1.5.2l1.5 9a2.7 2.7 0 0 1-2.7 3.3zM9 42.2c-.1.4-.6 2 0 3.1.2.6.7 1 1.3 1.2l.8.1c1.2 0 2.4-1 3-3 .3-.7 1-2.9 1.6-5.6 1.1-4 2.9-10.7 3.6-12 .4 0 .9-.2 1.3-.5 1.6-1 2.2-4 2.6-6.2 0-.5.2-1 .3-1.3a.6.6 0 1 0-1.3-.3L22 19c-.3 1.7-.9 4.6-2 5.4a1 1 0 0 1-.8.1c-.8-.1-1.2 1-2.3 4.7l-2.3 8.3a139 139 0 0 1-1.5 5.5c-.3.8-1 2.6-2.3 2.2a1 1 0 0 1-.6-.5c-.3-.6-.1-1.5.1-2.2l1.6-3.5c4-8.8 6-13.5 5.3-14.8a1 1 0 0 0-.6-.5.5.5 0 0 1-.3-.3c-.2-.6-.3-2.2 2.1-7a.6.6 0 0 0-1.1-.6c-2 4.1-2.8 6.7-2.1 8.1.1.4.5.8 1 1 0 1.5-3.8 10-5.4 13.6L9 42.2z"/>
+                                <path d="M19.5 16a.6.6 0 0 0-.8.5l-1.6 5a.6.6 0 1 0 1.2.4l1.6-5c.1-.4 0-.7-.4-.8zM19.5 22.8h.1c.3 0 .6-.2.7-.5l1.4-4.8c.1-.4 0-.7-.4-.8a.6.6 0 0 0-.8.4L19 22c0 .3.1.7.5.8z"/>
+                            </svg>
+                            <span class="text-xs tracking-wide uppercase">All</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="my-8">
+                    <div class="sm:flex justify-between items-stretch">
+                        <div class="mb-8 sm:mb-0">
+                            <div class="relative w-auto">
+                                <div class="flex items-stretch">
+                                    <div class="flex items-center justify-center bg-grey px-3">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M17 16v4h-2v-4h-2v-3h6v3h-2zM1 9h6v3H1V9zm6-4h6v3H7V5zM3 0h2v8H3V0zm12 0h2v12h-2V0zM9 0h2v4H9V0zM3 12h2v8H3v-8zm6-4h2v12H9V8z"/>
+                                        </svg>
+                                    </div>
+                                    <select class="block appearance-none w-full h-12 border border-grey text-grey-darker py-3 px-4 pr-8 leading-tight focus:outline-none focus:border-teal">
+                                            <option>Option 1</option>
+                                            <option>Extremely long option here</option>
+                                            <option>Option 3</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="filter-toggle" class="w-full sm:w-auto p-3 border border-grey mb-4 sm:mb-0">
+                            <svg class="w-4 h-4 inline-block align-middle mr-1 text-grey-darkest fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M12 12l8-8V0H0v4l8 8v8l4-4v-4z"/>
+                            </svg>
+                            <span class="inline-block">Filters</span>
+                        </button>
+                    </div>
+                    <div id="filter-container" class="mt-8 hidden">
+                        <div class="xxl:flex">
+                            <div class="sm:flex flex-1">
+                                <div class="mb-4 flex-1">
+                                    <label class="block mb-2">Keyword</label>
+                                    <div class="flex items-stretch">
+                                        <div class="flex items-center justify-center bg-grey px-3">
+                                            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                                            </svg>
+                                        </div>
+                                        <input class="appearance-none border border-grey w-full h-12 py-3 px-4 text-grey-darker leading-tight focus:outline-none focus:border-teal" type="text" value="Something delicious...">
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex-1">
+                                    <label class="block mb-2">Type</label>
+                                    <div class="relative">
+                                        <div class="flex items-stretch">
+                                            <div class="flex items-center justify-center bg-grey px-3">
+                                                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z"/></svg>
+                                            </div>
+                                            <select class="block appearance-none w-full h-12 border border-grey text-grey-darker py-3 px-4 pr-8 leading-tight focus:outline-none focus:border-teal">
+                                                    <option>Option 1</option>
+                                                    <option>Option 2</option>
+                                                    <option>Option 3</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sm:flex flex-1 xxl:flex-none xxl:w-1/3">
+                                <div class="mb-4 flex-1">
+                                    <label class="block mb-2">Max kcal</label>
+                                    <div class="flex items-stretch">
+                                        <div class="flex items-center justify-center bg-grey px-3">
+                                            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                        </div>
+                                        <input class="appearance-none border border-grey w-full h-12 py-3 px-4 text-grey-darker leading-tight focus:outline-none focus:border-teal" type="number" name="" id="">
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex-1">
+                                    <label class="block mb-2">Max prep time (in mins)</label>
+                                    <div class="flex items-stretch">
+                                        <div class="flex items-center justify-center bg-grey px-3">
+                                            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                        </div>
+                                        <input class="appearance-none border border-grey w-full h-12 py-3 px-4 text-grey-darker leading-tight focus:outline-none focus:border-teal" type="number" name="" id="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:flex flex-wrap -mx-4">
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <img class="absolute pin block" src="/src/img/food/spaghetti.jpg" alt="Spaghetti dish">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Spaghetti carbonara with special sauce
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">800 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">45 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <svg class="absolute absolute--is-center block w-32 h-32 bg-pink-lightest fill-current" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z" />
+                                    </svg>
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Some very delicious food
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">500 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">35 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <img class="absolute pin block" src="/src/img/food/spaghetti.jpg" alt="Spaghetti dish">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Spaghetti carbonara with special sauce
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">800 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">45 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <svg class="absolute absolute--is-center block w-32 h-32 bg-pink-lightest fill-current" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z" />
+                                    </svg>
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Some very delicious food
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">500 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">35 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <img class="absolute pin block" src="/src/img/food/spaghetti.jpg" alt="Spaghetti dish">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Spaghetti carbonara with special sauce
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">800 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">45 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <svg class="absolute absolute--is-center block w-32 h-32 bg-pink-lightest fill-current" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z" />
+                                    </svg>
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Some very delicious food
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">500 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">35 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <img class="absolute pin block" src="/src/img/food/spaghetti.jpg" alt="Spaghetti dish">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Spaghetti carbonara with special sauce
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">800 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">45 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="sm:w-1/2 md:w-1/3 xl:w-1/3 xxl:w-1/4 p-4">
+                        <a class="no-underline" href="#">
+                            <figure class="overflow-hidden rounded shadow text-indigo-darker transition hover:shadow-raised hover:translateY-2px">
+                                <div class="bg-pink-lightest relative aspect--is-square">
+                                    <svg class="absolute absolute--is-center block w-32 h-32 bg-pink-lightest fill-current" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M18 11v7a2 2 0 0 1-4 0v-5h-2V3a3 3 0 0 1 3-3h3v11zM4 10a2 2 0 0 1-2-2V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v4h1V1a1 1 0 0 1 2 0v7a2 2 0 0 1-2 2v8a2 2 0 0 1-4 0v-8z" />
+                                    </svg>
+                                </div>
+                                <figcaption class="p-4">
+                                    <h3 class="text-xl font-semibold leading-tight h-12 overflow-hidden">
+                                        Some very delicious food
+                                    </h3>
+                                    <div class="flex justify-between text-grey-dark mt-4">
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.375 34.649">
+                                                <path d="M9.604 32.651c-2.313-.176-3.747-1.353-4.108-1.662a17.583 17.583 0 0 1-.77-.697l-.417-.415c-2.008-2.132-2.649-4.37-2.144-7.481.215-1.315.697-2.526 1.207-3.809.14-.349.278-.701.414-1.057.145.955.24 1.869.273 2.532l.158 3.068 1.678-2.574c2.011-3.085 3.734-9.5 4-14.189.062-1.12-.073-2.176-.516-3.533-.443-1.357-1.766-1.13-1.766-1.13l.25 2.101c.374 3.146-.687 8.775-2.215 12.734-.233-1.326-.436-2.179-.68-3.322-.407-1.905-1.719-3.062-1.719-3.062s.031 1.188-.28 3.094c-.316 1.919-.848 3.073-1.455 4.601-.526 1.325-1.07 2.695-1.322 4.226-.609 3.745.212 6.574 2.681 9.195l.455.454c.272.261.57.533.873.79a9.213 9.213 0 0 0 5.328 2.134 1 1 0 0 0 .075-1.998z" />
+                                                <path d="M22.947 17.492c-.888-4.016-3.135-7.182-3.793-7.935-1.238-1.518-2.28-1.778-2.28-1.778s.583 1.344.676 2.867c.093 1.523-.149 2.049-.67 3.38-.417-1.435-2.568-5.998-4.068-8.279C11.395 3.593 9.392 1.29 7.322 0c.046.496.321 1.855.368 2.344 3.415 3.462 7.2 11.466 7.852 14.589l.405 1.938 1.32-1.476c.662-.74 1.521-2.485 1.987-4.193a18.956 18.956 0 0 1 1.741 4.722c.693 3.134.767 7.717-2.815 11.751-.624.704-1.977 2.816-4.759 2.974a1 1 0 0 0 .056 1.998l.058-.001c2.397-.137 4.102-1.344 6.141-3.644 4.141-4.664 4.065-9.921 3.271-13.51z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">500 kcal</span>
+                                        </div>
+                
+                                        <div class="">
+                                            <svg class="w-4 h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M16.32 7.1A8 8 0 1 1 9 4.06V2h2v2.06c1.46.18 2.8.76 3.9 1.62l1.46-1.46 1.42 1.42-1.46 1.45zM10 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM7 0h6v2H7V0zm5.12 8.46l1.42 1.42L10 13.4 8.59 12l3.53-3.54z" />
+                                            </svg>
+                                            <span class="leading-none text-sm">35 min</span>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/src/main.js"></script>
+</body>
+</html>
