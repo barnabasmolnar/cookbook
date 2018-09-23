@@ -4,3 +4,7 @@ design/dist
 design/.cache
 design/raw-stuff
 design/readme.txt
+
+# server folder
+server/node_modules
+server/credentials.json
