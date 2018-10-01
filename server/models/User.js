@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     googleId: { type: String, required: true },
     name: { type: String, required: true },
     profilePicURL: String
