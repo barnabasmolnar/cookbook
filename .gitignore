@@ -1,4 +1,4 @@
-#root folder
+# root folder
 custom-readme.txt
 
 # design folder
@@ -11,3 +11,20 @@ design/readme.txt
 # server folder
 server/node_modules
 server/credentials.json
+
+# Client
+# dependencies
+client/node_modules
+# testing
+client/coverage
+# production
+client/build
+# misc
+client/.DS_Store
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
