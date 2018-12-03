@@ -13,6 +13,7 @@ server/node_modules
 server/credentials.json
 
 # Client
+client/src/index.css
 # dependencies
 client/node_modules
 # testing
