@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-select": "^2.1.2"
   },
   "scripts": {
     "build:css": "postcss src/styles/index.css -o src/index.css",

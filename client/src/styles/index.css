@@ -47,3 +47,6 @@
 .custom-control__checkbox:checked ~ .custom-control__label::after {
     background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/></svg>");
 }
+.custom-control__checkbox:focus ~ .custom-control__label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(77, 192, 181, .25);
+}
