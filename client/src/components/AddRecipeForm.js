@@ -1,7 +1,7 @@
 import React from "react";
 import CreatableSelect from "react-select/lib/Creatable";
 
-const RecipeForm = () => (
+const AddRecipeForm = () => (
     <div>
         <h2 className="py-16 text-4xl py-8">Add Recipe</h2>
         <form>
@@ -266,4 +266,11 @@ const RecipeForm = () => (
     </div>
 );
 
-export default RecipeForm;
+export default AddRecipeForm;
+
+// TODO
+// - Refactor component to class based stateful component
+// - Store input field values in local state
+// - Add react-router as a dependency to
+//   1. have this component appear on its own route
+//   2. redirect user upon form submission (to all recipes, user profile or to the homepage maybe)

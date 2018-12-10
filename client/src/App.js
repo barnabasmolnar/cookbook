@@ -1,9 +1,9 @@
 import React from 'react';
-import RecipeForm from './components/RecipeForm';
+import AddRecipeForm from './components/AddRecipeForm';
 
 const App = () => (
     <div className="container mx-auto px-4">
-        <RecipeForm />
+        <AddRecipeForm />
     </div>
 )
 
